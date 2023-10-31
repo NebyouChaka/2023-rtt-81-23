@@ -2,7 +2,7 @@ package arrays;
 
 import java.util.Arrays;
 
-public class AdvanceArrays {
+public class AdvancedArrays {
 	
 	public static void main(String[] arg ){
 		
@@ -32,4 +32,4 @@ public class AdvanceArrays {
 		
 	}
 }
-}
+
