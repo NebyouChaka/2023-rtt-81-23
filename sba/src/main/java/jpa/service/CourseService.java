@@ -15,4 +15,9 @@ public class CourseService {
     public List<Course> getAllCourses() {
         return courseDAO.getAllCourses();
     }
+
+	public static Course getCourseById(int courseID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,89 +1,89 @@
 package jpa.mainrunner;
 
-import jpa.entitymodels.Student;
-import jpa.dao.CourseDAO;
-import jpa.dao.StudentDAO;
-import jpa.entitymodels.Course;
-import jpa.service.StudentService;
-import jpa.service.CourseService;
-
 import java.util.List;
 import java.util.Scanner;
+import jpa.entitymodels.Course;
+import jpa.entitymodels.Student;
+import jpa.entitymodels.StudentCourse;
+import jpa.service.CourseService;
+import jpa.service.StudentCourseService;
+import jpa.service.StudentService;
 
 public class SMSRunner {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-         
-        StudentDAO studentDAO = new YourStudentDAOImplementation();
-        CourseDAO courseDAO = new YourCourseDAOImplementation();
-		StudentService studentService = new StudentService(studentDAO);
-		CourseService courseService = new CourseService(courseDAO);
+        System.out.println("Are you a");
+        System.out.println("1. Student");
+        System.out.println("2. Quit");
+        System.out.print("Answer: ");
+        Scanner in = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("Are you a(n)");
-            System.out.println("1. Student");
-            System.out.println("2. quit");
+        int answer = in.nextInt();
 
-            System.out.print("Please, enter 1 or 2: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline
+        if (answer == 1) {
+            StudentService studentService = new StudentService();
+            CourseService courseService = new CourseService();
+            StudentCourseService studentCourseService = new StudentCourseService();
 
-            if (choice == 1) {
-                System.out.print("Enter Your Email: ");
-                String email = scanner.nextLine();
-                System.out.print("Enter Your Password: ");
-                String password = scanner.nextLine();
+            System.out.println("Enter your email: ");
+            in.nextLine();
+            String email = in.nextLine();
+            System.out.println("Enter your password: ");
+            String password = in.nextLine();
 
-                if (studentService.validateStudent(email, password)) {
-                    List<Course> studentCourses = studentService.getStudentCourses(email);
-                    System.out.println("My Classes:");
-                    System.out.println("#   COURSE NAME  INSTRUCTOR NAME");
-                    for (Course course : studentCourses) {
-                        System.out.printf("%-4d%-15s%-15s%n", course.getId(), course.getName(), course.getInstructorName());
-                    }
+            if (studentService.validateStudent(email, password)) {
+                Student student = studentService.getStudentByEmail(email);
+                List<Course> courseList = courseService.getAllCourses();
+                List<StudentCourse> studentCourses = studentCourseService.getAllStudentCourses(null, student.getEmail());
 
-                    System.out.println("1. Register to Class");
-                    System.out.println("2. Logout");
+                myClasses(studentCourses, courseList);
 
-                    System.out.print("Select an option: ");
-                    int additionalChoice = scanner.nextInt();
-                    scanner.nextLine();  // Consume the newline
+                System.out.println("What would you like to do?");
+                System.out.println("1. Register for a new Class");
+                System.out.println("2. Log Out");
+                System.out.print("Answer: \n");
+                answer = in.nextInt();
 
-                    if (additionalChoice == 1) {
-                        System.out.println("All Courses:");
-                        List<Course> allCourses = courseService.getAllCourses();
-                        System.out.println("ID   COURSE NAME  INSTRUCTOR NAME");
-                        for (Course course : allCourses) {
-                            System.out.printf("%-4d%-15s%-15s%n", course.getId(), course.getName(), course.getInstructorName());
-                        }
+                if (answer == 1) {
+                    // Display a list of all Classes
+                    allClasses(courseList);
 
-                        System.out.print("Which Course? Enter the course ID: ");
-                        int courseId = scanner.nextInt();
-                        scanner.nextLine();  // Consume the newline
-
-                        // Check if the student is already registered for the selected course
-                        if (studentCourses.stream().anyMatch(c -> c.getId() == courseId)) {
-                            System.out.println("You are already registered in that course!");
-                        } else {
-                            // Register the student for the selected course
-                            studentService.registerStudentToCourse(email, courseId);
-                            studentCourses = studentService.getStudentCourses(email);  // Update the list of registered courses
-                            System.out.println("You have been registered for the course.");
-                        }
-                    } else if (additionalChoice == 2) {
-                        System.out.println("You have been signed out.");
-                        break;
-                    }
-                } else {
-                    System.out.println("Invalid credentials. Program ends.");
-                    break;
+                    System.out.print("Select Course by ID Number: ");
+                    int courseID = in.nextInt();
+                    System.out.println("\n Attempting to Register...");
+                    studentCourseService.registerStudentToCourse(null, student.getEmail(), courseID);
                 }
-            } else if (choice == 2) {
-                System.out.println("Program ends. Goodbye!");
-                break;
+
+                System.out.println("Logging Out...");
             } else {
-                System.out.println("Invalid option. Please select 1 (Student) or 2 (quit).");
+                System.out.println("Invalid Email or Password.");
             }
+        }
+
+        System.out.println("Closing Program. Goodbye.");
+    }
+
+    public static void myClasses(List<StudentCourse> studentCourses, List<Course> courseList) {
+        System.out.println("My Classes: ");
+        System.out.printf("%-5s|%-25s|%-25s", "#", "COURSE NAME", "INSTRUCTOR NAME \n");
+
+        for (StudentCourse studentCourse : studentCourses) {
+            int courseID = studentCourse.getCourseID();
+            Course course = CourseService.getCourseById(courseID);
+
+            if (course != null) {
+                System.out.printf("%-5s|%-25s|%-25s\n", course.getId(), course.getName(), course.getInstructorName());
+            } else {
+                System.out.println("Course not found for StudentCourse.");
+            }
+        }
+    }
+
+    public static void allClasses(List<Course> courseList) {
+        System.out.println("All Classes: ");
+        System.out.printf("%-5s|%-25s|%-25s", "#", "COURSE NAME", "INSTRUCTOR NAME \n");
+        for (Course course : courseList) {
+            System.out.printf("%-5s|%-25s|%-25s\n", course.getId(), course.getName(), course.getInstructorName());
         }
     }
 }
