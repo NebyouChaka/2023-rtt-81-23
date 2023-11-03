@@ -13,10 +13,10 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		
-		<mapping class="org.perscholas.database.entity.Order" />
-		<mapping class="org.perscholas.database.entity.Customer" />
-		<mapping class="org.perscholas.database.entity.OrderDetail" />
-		<mapping class="org.perscholas.database.entity.Product" />
+		<mapping class="org.perscholas.database.entity.Course" />
+		<mapping class="org.perscholas.database.entity.Student" />
+		<mapping class="org.perscholas.database.entity.StudentCourse" />
+		
 
 	</session-factory>
 </hibernate-configuration>
