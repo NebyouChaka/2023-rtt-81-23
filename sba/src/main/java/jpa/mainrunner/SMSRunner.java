@@ -1,89 +1,145 @@
 package jpa.mainrunner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import jpa.entitymodels.Course;
 import jpa.entitymodels.Student;
-import jpa.entitymodels.StudentCourse;
 import jpa.service.CourseService;
-import jpa.service.StudentCourseService;
 import jpa.service.StudentService;
 
 public class SMSRunner {
 
-    public static void main(String[] args) {
-        System.out.println("Are you a");
-        System.out.println("1. Student");
-        System.out.println("2. Quit");
-        System.out.print("Answer: ");
-        Scanner in = new Scanner(System.in);
+	private Scanner scanner;
+	private CourseService courseService;
+	private StudentService studentService;
+	private Student currentStudent;
 
-        int answer = in.nextInt();
+	public SMSRunner() {
+		scanner = new Scanner(System.in);
 
-        if (answer == 1) {
-            StudentService studentService = new StudentService();
-            CourseService courseService = new CourseService();
-            StudentCourseService studentCourseService = new StudentCourseService();
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-            System.out.println("Enter your email: ");
-            in.nextLine();
-            String email = in.nextLine();
-            System.out.println("Enter your password: ");
-            String password = in.nextLine();
+		courseService = new CourseService(sessionFactory, courseService);
+		studentService = new StudentService(sessionFactory, courseService);
+	}
 
-            if (studentService.validateStudent(email, password)) {
-                Student student = studentService.getStudentByEmail(email);
-                List<Course> courseList = courseService.getAllCourses();
-                List<StudentCourse> studentCourses = studentCourseService.getAllStudentCourses(null, student.getEmail());
+	public static void main(String[] args) {
+		SMSRunner sms = new SMSRunner();
+		sms.run();
+	}
 
-                myClasses(studentCourses, courseList);
+	private void run() {
 
-                System.out.println("What would you like to do?");
-                System.out.println("1. Register for a new Class");
-                System.out.println("2. Log Out");
-                System.out.print("Answer: \n");
-                answer = in.nextInt();
+		switch (menu1()) {
+		case 1:
+			if (studentLogin()) {
+				registerMenu();
+			}
+			break;
+		case 2:
+			System.out.println("Goodbye!");
+			break;
+		default:
+			System.out.println("Invalid selection. Goodbye!");
+		}
+	}
 
-                if (answer == 1) {
-                    // Display a list of all Classes
-                    allClasses(courseList);
+	private int menu1() {
+		System.out.println("1. Student Login\n2. Quit Application");
+		System.out.print("Please Enter Selection: ");
+		return scanner.nextInt();
+	}
 
-                    System.out.print("Select Course by ID Number: ");
-                    int courseID = in.nextInt();
-                    System.out.println("\n Attempting to Register...");
-                    studentCourseService.registerStudentToCourse(null, student.getEmail(), courseID);
-                }
+	private boolean studentLogin() {
+		System.out.print("Enter your email address: ");
+		String email = scanner.next();
+		System.out.print("Enter your password: ");
+		String password = scanner.next();
 
-                System.out.println("Logging Out...");
-            } else {
-                System.out.println("Invalid Email or Password.");
-            }
-        }
+		boolean isValidStudent = studentService.validateStudent(email, password);
 
-        System.out.println("Closing Program. Goodbye.");
-    }
+		if (isValidStudent) {
+			currentStudent = studentService.getStudentByEmail(email);
+			List<Course> courses = studentService.getStudentCourses(email);
+			System.out.println("My Classes");
+			System.out.printf("%8s%35s%30s", "ID", "Course", "Instructor");
+			for (Course course : courses) {
+				String formattedOutput = String.format("%n%n%8d%35s%30s", course.getcId(), course.getcName(),
+						course.getcInstructorName());
+				System.out.println(formattedOutput);
+			}
+			return true;
+		} else {
+			System.out.println("User validation failed. Goodbye!");
+			return false;
+		}
+	}
 
-    public static void myClasses(List<StudentCourse> studentCourses, List<Course> courseList) {
-        System.out.println("My Classes: ");
-        System.out.printf("%-5s|%-25s|%-25s", "#", "COURSE NAME", "INSTRUCTOR NAME \n");
+	private void registerMenu() {
+		System.out.println("\n1. Register to Class\n2. Logout");
+		System.out.print("Please Enter Selection: ");
 
-        for (StudentCourse studentCourse : studentCourses) {
-            int courseID = studentCourse.getCourseID();
-            Course course = CourseService.getCourseById(courseID);
+		int choice = scanner.nextInt();
 
-            if (course != null) {
-                System.out.printf("%-5s|%-25s|%-25s\n", course.getId(), course.getName(), course.getInstructorName());
-            } else {
-                System.out.println("Course not found for StudentCourse.");
-            }
-        }
-    }
+		switch (choice) {
+		case 1:
 
-    public static void allClasses(List<Course> courseList) {
-        System.out.println("All Classes: ");
-        System.out.printf("%-5s|%-25s|%-25s", "#", "COURSE NAME", "INSTRUCTOR NAME \n");
-        for (Course course : courseList) {
-            System.out.printf("%-5s|%-25s|%-25s\n", course.getId(), course.getName(), course.getInstructorName());
-        }
-    }
+			List<Course> allCourses = courseService.getAllCourses();
+			List<Course> studentCourses = studentService.getStudentCourses(currentStudent.getsEmail());
+			List<Object> registeredCourses = new ArrayList<>(studentCourses);
+
+			allCourses.removeAll(studentCourses);
+
+			System.out.printf("%n%8s%35s%30s", "ID", "Course", "Instructor");
+			for (Course course : allCourses) {
+				String formattedOutput = String.format("%n%8d%35s%30s", course.getcId(), course.getcName(),
+						course.getcInstructorName());
+				System.out.println(formattedOutput);
+			}
+
+			System.out.print("Enter Course Number: ");
+
+			if (scanner.hasNextInt()) {
+				int number = scanner.nextInt();
+
+				Course selectedCourse = courseService.getCourseById(number);
+
+				if (studentCourses.stream().anyMatch(course -> course.getcId() == number)) {
+					System.out.println("Course ID " + number + " is already registered.");
+				} else {
+
+					studentService.registerStudentToCourse(currentStudent.getsEmail(), selectedCourse.getcId());
+
+					currentStudent.getsCourses().add(selectedCourse);
+					studentService.updateStudent(currentStudent);
+
+					List<Course> studentCoursesUpdated = studentService.getStudentCourses(currentStudent.getsEmail());
+					System.out.println("Registration successful!");
+
+					System.out.println("\nUpdated Registered Courses:");
+					System.out.printf("%8s%35s%30s%n", "ID", "Course", "Instructor");
+					for (Course course : studentCoursesUpdated) {
+						String formattedOutput = String.format("%8d%35s%30s%n", course.getcId(), course.getcName(),
+								course.getcInstructorName());
+						System.out.println(formattedOutput);
+					}
+				}
+			} else {
+				System.out.println("Invalid input. Please enter a valid course number.");
+				scanner.next();
+			}
+
+			break;
+		case 2:
+			System.out.println("Goodbye!");
+			break;
+		default:
+			System.out.println("Invalid selection. Goodbye!");
+		}
+	}
+
 }

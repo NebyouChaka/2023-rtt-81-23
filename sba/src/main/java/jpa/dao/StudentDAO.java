@@ -1,18 +1,23 @@
 package jpa.dao;
 
 import java.util.List;
-import jpa.entitymodels.Student;
+
 import jpa.entitymodels.Course;
+import jpa.entitymodels.Student;
+
+
 
 public interface StudentDAO {
-	
-	List<Student> getAllStudents();
+    List<Student> getAllStudents();
 
-	Student getStudentByEmail(String email);
+    Student getStudentByEmail(String email);
 
-	boolean validateStudent(String email, String password);
+    boolean validateStudent(String email, String password);
 
-	boolean registerStudentToCourse(String email, int courseId);
+    void registerStudentToCourse(String studentEmail, int courseId);
 
-	List<Course> getStudentCourses(String email);
+    List<Course> getStudentCourses(String studentEmail);
+
+	void updateStudent(Student student);
+    
 }

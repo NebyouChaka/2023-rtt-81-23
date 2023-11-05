@@ -1,64 +1,53 @@
 package jpa.entitymodels;
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Course")
+@Table(name = "course")
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cId")
-    private int id;  
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer cId;
 
-    @Column(name = "cName")
-    private String name;   
+	public Integer getcId() {
+		return cId;
+	}
 
-    @Column(name = "cInstructorName")
-    private String instructorName;  
+	public void setcId(Integer cId) {
+		this.cId = cId;
+	}
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Student> students;
+	@Column(name = "name")
+	private String cName;
 
-    public Course() {
-        // Default constructor with no parameters
-    }
+	@Column(name = "instructor")
+	private String cInstructorName;
+	
+	// ------------Get/Set----------------//
 
-    public Course(String name, String instructorName) {
-        this.name = name;
-        this.instructorName = instructorName;
-    }
+	public String getcName() {
+		return cName;
+	}
 
-    // Getters and setters for all private members
-    public int getId() {
-        return id;
-    }
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public String getcInstructorName() {
+		return cInstructorName;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setcInstructorName(String cInstructorName) {
+		this.cInstructorName = cInstructorName;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String toString() {
+		return String.format("%5d%15s%15s", cId, cName, cInstructorName);
+	}
 
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 }
