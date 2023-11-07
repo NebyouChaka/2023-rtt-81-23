@@ -1,28 +1,15 @@
-
-* {
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* 50% of the viewport height */
+    background-image: url("https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg");
+    background-size: cover;
+    background-position: center;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-
-body {
-    background-image: url('path_to_your_background_image.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     font-family: Arial, sans-serif;
 }
-
-/* Style the navigation menu */
-nav {
-    background-color: blue; 
-    padding: 10px;
-    display: flex; 
-    justify-content: space-between; 
-    margin: 15px;
-}
-
 nav ul {
     list-style: none;
     display: flex;
@@ -34,26 +21,75 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: #fff; 
-    font-weight: bold;
-    transition: color 0.3s; 
+    color: #fff; /* White text color */
+    font-size: 30px;
+    transition: color 0.3s; /* Add a smooth color transition effect */
 }
 
 nav a:hover {
-    color: rgb(0, 255, 55); 
+    color: #00f; /* Change text color on hover (e.g., blue) */
 }
 
-/* Center the container for login and registration sections */
 .container {
-    width: 80%;
-    max-width: 400px;
-    margin: 0 auto;
+    background: black;
+    color: white;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    border-radius: 5px;
 }
-form input {
-    width: 200px; /* Adjust the width as needed for your input fields */
-  }
 
+.container h2 {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    margin-top: 20px;
+    padding: 5px;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    width: 50%;
+    padding: 5px;
+    margin: 5px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    
+    
+}
+
+p {
+    margin: 10px 0;
+
+}
+
+a {
+    color: #ceba09;
+    text-decoration: none;
+}
+
+a:hover {
+    color: yellow;
+}
