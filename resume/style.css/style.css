@@ -1,0 +1,176 @@
+body {
+    background-color: #f3f4f6;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    transition: blue 0.2s;
+}
+
+.navbar a.nav-link {
+    color: #333;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+
+.navbar-light .navbar-nav .nav-link {
+    color: #007bff;
+}
+
+/* Home Section Styles */
+.rounded-image {
+    border-radius: 50%; /* Use a value of 50% to create a circular shape */
+}
+#Home {
+    background-color:black; 
+    background-size: cover;
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 0;
+}
+
+#Home h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin: 0;
+}
+
+#Home h4 {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+/* About Section Styles */
+#About {
+    padding: 50px 0;
+}
+
+#About h3 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+#About h1 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+/* Experience Section Styles */
+#Experience {
+    padding: 50px 0;
+}
+
+#Experience h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* Skills Section Styles */
+#Skills {
+    padding: 50px 0;
+}
+
+#Skills h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* Services Section Styles */
+#Services {
+    padding: 50px 0;
+    
+}
+
+#Services h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* Portfolio Section Styles */
+#Portfolio {
+    padding: 50px 0;
+}
+
+#Portfolio h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* Contact Section Styles */
+#Contact {
+    padding: 50px 0;
+}
+
+#Contact h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* Footer Styles */
+#Footer {
+    background-color: #333;
+}
+
+/* Text Colors */
+.text-accent-1 {
+    color: #ff6363;
+}
+
+.text-accent-2 {
+    color: #ffbd69;
+}
+
+.text-accent-3 {
+    color: #badc58;
+}
+
+.text-accent-4 {
+    color: #2d98da;
+}
+
+.text-light-grey {
+    color: #b4bcc2;
+}
+
+/* Text Font Weights */
+.text-cursive {
+    font-family: 'Great Vibes', cursive;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 30px;
+    padding: 15px 30px;
+}
+
+.bg-accent-4 {
+    background-color: #2d98da;
+}
+.bg-white {
+    background-color: lightgray !important;
+}
+.bg-light-grey {
+    background-color: gray !important;
+}
+
+/* Skills Circles Styles */
+.skills-circle {
+    width: 24px;
+    height: 24px;
+    background-color: #2d98da;
+    display: inline-block;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+

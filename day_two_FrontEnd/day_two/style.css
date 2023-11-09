@@ -1,40 +1,25 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* 50% of the viewport height */
     background-image: url("https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg");
     background-size: cover;
     background-position: center;
-    margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
-}
-nav ul {
-    list-style: none;
-    display: flex;
-}
-
-nav li {
-    margin-right: 10px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff; /* White text color */
-    font-size: 30px;
-    transition: color 0.3s; /* Add a smooth color transition effect */
-}
-
-nav a:hover {
-    color: #00f; /* Change text color on hover (e.g., blue) */
+ 
 }
 
 .container {
     background: black;
     color: white;
     padding: 30px;
-    border-radius: 5px;
+    border-radius: 15px;
+   
 }
 
 .container h2 {
@@ -75,9 +60,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
-    
-    
+    background-color: #0056b3;    
 }
 
 p {
@@ -92,4 +75,15 @@ a {
 
 a:hover {
     color: yellow;
+}
+.social-login-buttons  {
+    color: blue;
+    text-align: center;
+    font-size: 24px; 
+    margin: 10px;
+}
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    
 }

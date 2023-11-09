@@ -114,8 +114,8 @@ public class SMSRunner {
 
 					studentService.registerStudentToCourse(currentStudent.getsEmail(), selectedCourse.getcId());
 
-					currentStudent.getsCourses().add(selectedCourse);
-					studentService.updateStudent(currentStudent);
+					//currentStudent.getsCourses().add(selectedCourse);
+					//studentService.updateStudent(currentStudent);
 
 					List<Course> studentCoursesUpdated = studentService.getStudentCourses(currentStudent.getsEmail());
 					System.out.println("Registration successful!");
