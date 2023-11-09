@@ -1,176 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sacramento&display=swap");
+
+*:not(i) {
+    font-family: "Open Sans", sans-serif !important;;
+}
+
+.fw-medium {
+    font-weight: 500 !important;
+}
+.fw-semibold {
+    font-weight: 600 !important;
+}
+.fw-extrabold {
+    font-weight: 800 !important;
+}
+.text-cursive {
+    font-family: "Sacramento", cursive !important;
+}
+html {
+    scroll-padding-top: 58px;
+}
 body {
-    background-color: #f3f4f6;
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
+    padding-top: 58px;
 }
+/* section {
+    padding-top: 58px;
+    padding-bottom: 58px;
+} */
 
-a {
+.navbar-brand {
+    border: solid var(--accent-4) 3px;
+    padding-right: 0.65em;
+    padding-left: 0.65em;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #0dfd45;
     text-decoration: none;
-    color: inherit;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
-
-/* Navbar Styles */
-.navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    transition: blue 0.2s;
-}
-
-.navbar a.nav-link {
-    color: #333;
-    font-weight: 600;
-    transition: color 0.2s;
-}
-
-
 .navbar-light .navbar-nav .nav-link {
-    color: #007bff;
+    color: rgba(217, 25, 25, 0.55);
 }
 
-/* Home Section Styles */
-.rounded-image {
-    border-radius: 50%; /* Use a value of 50% to create a circular shape */
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
 }
+
 #Home {
-    background-color:black; 
+    background-color:black;
     background-size: cover;
-    color: #ffffff;
+    background-position: center bottom;
+    height: 70vh;
+    min-height: 400px;
+}
+#Home .btn {
+    border: solid 2px transparent;
+}
+#Home .btn:hover {
+    background-color: transparent !important;
+    border: solid 2px var(--accent-4);
+    color: var(--accent-4) !important;
+}
+
+.skills-circle {
+    width: 15px; 
+    height: 15px; 
+    border-radius: 100%;
+    display: inline-block;
+}
+.rounded-image {
+    border-radius: 50%;
+    transition: width 2s, height 2s;
+    
+}
+.rounded-image:hover {
+    width: 600px;
+    height: 600px; /* Rounded image when hovering */
+}
+@media (min-width: 992px){
+.navbar-expand-lg, .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+}
+/* inputs */
+.container1 {
+    background-color: #ccc;
     text-align: center;
-    padding: 100px 0;
-}
-
-#Home h1 {
-    font-size: 48px;
-    font-weight: 600;
-    margin: 0;
-}
-
-#Home h4 {
-    font-size: 24px;
-    font-weight: 400;
-}
-
-/* About Section Styles */
-#About {
-    padding: 50px 0;
-}
-
-#About h3 {
-    font-size: 32px;
-    font-weight: 600;
-}
-
-#About h1 {
-    font-size: 48px;
-    font-weight: 700;
-}
-
-/* Experience Section Styles */
-#Experience {
-    padding: 50px 0;
-}
-
-#Experience h1 {
-    font-size: 32px;
-    font-weight: 600;
-}
-
-/* Skills Section Styles */
-#Skills {
-    padding: 50px 0;
-}
-
-#Skills h1 {
-    font-size: 32px;
-    font-weight: 600;
-}
-
-/* Services Section Styles */
-#Services {
-    padding: 50px 0;
+    padding: 20px;
+    height: auto;
     
 }
 
-#Services h1 {
-    font-size: 32px;
-    font-weight: 600;
+.login-section {
+    background: #666;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 700px; /* Increase the width to make it wider */
+    height: auto;
+    margin: 0 auto; /* Center the sections */
 }
 
-/* Portfolio Section Styles */
-#Portfolio {
-    padding: 50px 0;
+.login-section h2 {
+    font-size: 24px;
+    margin: 0 0 20px;
 }
 
-#Portfolio h1 {
-    font-size: 32px;
-    font-weight: 600;
+form {
+    text-align: left;
+    color: #fff;
 }
 
-/* Contact Section Styles */
-#Contact {
-    padding: 50px 0;
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0;
 }
 
-#Contact h1 {
-    font-size: 32px;
-    font-weight: 600;
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px 0 20px;
 }
 
-/* Footer Styles */
-#Footer {
-    background-color: #333;
+input[type="submit"] {
+    width: 50%;
+    padding: 5px;
+    margin: 5px;
+    background-color: #007BFF;
+    color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-/* Text Colors */
-.text-accent-1 {
-    color: #ff6363;
+input[type="submit"]:hover {
+    background-color: #f7bf30;    
 }
 
-.text-accent-2 {
-    color: #ffbd69;
+p {
+    margin: 10px 0;
+
 }
 
-.text-accent-3 {
-    color: #badc58;
+a {
+    color: #ceba09;
+    text-decoration: none;
 }
 
-.text-accent-4 {
-    color: #2d98da;
+a:hover {
+    color: yellow;
+}
+.social-login-buttons  {
+    color: blue;
+    text-align: center;
+    font-size: 24px; 
+    margin: 30px;
+    padding: 40px;
+}
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    
 }
 
-.text-light-grey {
-    color: #b4bcc2;
-}
-
-/* Text Font Weights */
-.text-cursive {
-    font-family: 'Great Vibes', cursive;
-}
-
-/* Button Styles */
-.btn {
-    border-radius: 30px;
-    padding: 15px 30px;
-}
-
-.bg-accent-4 {
-    background-color: #2d98da;
-}
-.bg-white {
-    background-color: lightgray !important;
-}
-.bg-light-grey {
-    background-color: gray !important;
-}
-
-/* Skills Circles Styles */
-.skills-circle {
-    width: 24px;
-    height: 24px;
-    background-color: #2d98da;
+.or-text {
+    color: #ccc;
+    padding: 20px 20px 20px 20px;
+    position: absolute;
+    font-size: 19px;
+    transform: translate(-50%, -50%);
     display: inline-block;
-    margin-right: 8px;
-    border-radius: 50%;
+    margin: 10px ;
 }
+
+p {
+    margin-top: 20px;
+}
+
+@media (max-width: 430px) {
+    .login-section {
+        width: 100%; /* Change width to 100% on smaller screens */
+    }
+}
+@media (max-width: 430px) {
+    img {
+        max-width: 90%; /* Adjust the max-width as needed */
+        padding: 70px;
+    }
+}
+@media (max-width: 430px) {
+    .separator {
+        position: relative; /* Reset the position */
+        text-align: center;
+        padding: 5px;
+        font-size: 12px;
+        color: #fff;
+       
+        
+    }
+}
+
 
 
