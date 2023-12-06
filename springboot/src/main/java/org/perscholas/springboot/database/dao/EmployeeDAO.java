@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface EmployeeDAO extends JpaRepository<Employee, Long> {
+    public Employee findById(int id);
+
     @Query("SELECT e FROM Employee e WHERE e.firstName LIKE :firstName AND e.lastName LIKE :lastName")
     List<Employee> findByFirstNameContainingAndLastNameContaining(String firstName, String lastName);
 }

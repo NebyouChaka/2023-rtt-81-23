@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/pub/css/global-style.css">
 <jsp:include page="../include/header.jsp"/>
 
 
@@ -50,6 +50,7 @@
                     <td>First Name</td>
                     <td>Last Name</td>
                     <td>Department name</td>
+                    <td>Edit</td>
                 </tr>
                 <c:forEach items="${employeeVar}" var="employee">
                     <tr>
@@ -57,6 +58,7 @@
                              <td>${employee.firstName}</td>
                              <td>${employee.lastName}</td>
                              <td>${employee.department}</td>
+                              <td><a href="/employee/edit/${employee.id}">Edit</a></td>
                     </tr>
                 </c:forEach>
             </table>
