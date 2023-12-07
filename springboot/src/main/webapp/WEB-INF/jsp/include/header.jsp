@@ -35,6 +35,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/auth/register">User Registration</a>
                   </li
+                   <li class="nav-item">
+                      <a class="nav-link" href="/auth/login">Login</a>
+                   </li
             </ul>
         </div>
     </div>
