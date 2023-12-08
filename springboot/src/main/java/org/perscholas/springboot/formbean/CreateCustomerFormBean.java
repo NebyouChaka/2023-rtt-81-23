@@ -29,5 +29,6 @@ public class CreateCustomerFormBean {
     @Length(max = 45, message = "City must be less than 45 characters.")
     private String city;
 
+    private String imageUrl;
 
 }

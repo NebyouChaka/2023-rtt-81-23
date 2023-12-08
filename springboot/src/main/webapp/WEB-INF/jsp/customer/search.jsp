@@ -41,32 +41,44 @@
             </div>
         </form>
 
-        <c:if test="${not empty customerVar}">
-            <h1 class="pt-5">Customers Found ${customerVar.size()}</h1>
+<c:if test="${not empty customerVar}">
+    <section class="py-5" style="background-color: #f8f9fa;">
+        <div class="container text-center">
+            <h1 class="display-4 mb-5 font-weight-bold">Customers Found: ${customerVar.size()}</h1>
 
-            <table class="table table-hover">
-                <tr>
-                    <td>Id</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Phone</td>
-                    <td>City</td>
-                    <td>Edit</td>
-                </tr>
-                <c:forEach items="${customerVar}" var="customer">
-                    <tr>
-                        <td>${customer.id}</td>
-                        <td>${customer.firstName}</td>
-                        <td>${customer.lastName}</td>
-                        <td>${customer.phone}</td>
-                        <td>${customer.city}</td>
-                        <td><a href="/customer/edit/${customer.id}">Edit</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover" style="background-color: #ffffff;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${customerVar}" var="customer">
+                            <tr>
+                                <td>${customer.id}</td>
+                                <td>${customer.firstName}</td>
+                                <td>${customer.lastName}</td>
+                                <td>${customer.phone}</td>
+                                <td>${customer.city}</td>
+                                <td><img src="${customer.imageUrl}" style="max-width:100px"></td>
+                                <td><a href="/customer/edit/${customer.id}">Edit</a></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
 
-        </c:if>
-    </div>
-</section>
+        </div>
+    </section>
+</c:if>
+
+
+
 
 <jsp:include page="../include/footer.jsp"/>
